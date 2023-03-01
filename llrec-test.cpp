@@ -2,6 +2,7 @@
 #include <fstream>
 #include <functional>
 #include "llrec.h"
+#include "llrec.cpp"
 using namespace std;
 
 /**
@@ -62,13 +63,17 @@ void dealloc(Node* head)
     }
 }
 
+struct IsOdd
+{
+    bool operator()(int num) {
+        return (num % 2) != 0;
+    }
+};
+
 // -----------------------------------------------
 //   Add any helper functions or
 //   function object struct declarations
 // -----------------------------------------------
-
-
-
 
 
 int main(int argc, char* argv[])
@@ -82,10 +87,27 @@ int main(int argc, char* argv[])
     // Feel free to update any code below this point
     // -----------------------------------------------
     Node* head = readList(argv[1]);
+    //Node* head = nullptr;
+	
     cout << "Original list: ";
     print(head);
 
     // Test out your linked list code
+
+    //readList(const char* filename)
+    /*Node* small = (Node*) &head; // set to a non-null address
+	Node* large = (Node*) &head; // set to a non-null address
+	llpivot(head, small, large, 5);
+
+    cout << "new head: ";
+    print(head);
+    print(small);
+    print(large);*/
+
+
+    Node* help = llfilter(readList(argv[1]), IsOdd());
+    cout << "new list: " << endl;
+    print(help);
 
 
 
